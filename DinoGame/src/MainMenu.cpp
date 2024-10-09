@@ -1,24 +1,20 @@
 #include <iostream>
 #include <cstdlib>  
+#include <windows.h>
 
 using namespace std;
 
-void displayMenu() {
-    system("cls");  
-
-    cout << " ____ ___ _   _  ___    ____  _   _ _   _  " << endl;
-    cout << "|  _ \\_ _| \\ | |/ _ \\  |  _ \\| | | | \\ | | " << endl;
-    cout << "| | | | ||  \\| | | | | | |_) | | | |  \\| | " << endl;
-    cout << "| |_| | || |\\  | |_| | |  _ <| |_| | |\\  | " << endl;
-    cout << "|____/___|_| \\_|\\___/  |_| \\_\\\\___/|_| \\_| " << endl;
-
-    cout << "\n1. Start Game" << endl;
-    cout << "2. Restart Game" << endl;
-    cout << "3. Settings" << endl;
-    cout << "4. Exit" << endl;
-    cout << "Enter your choice: ";
+void instructions() {
+    system("cls");
+    cout << "Instructions";
+    cout << "\n----------------";
+    cout << "\n1. Avoid hurdles by jumping";
+    cout << "\n2. Press 'Spacebar' to jump ";
+    cout << "\n3. Press 'p' to pause game ";
+    cout << "\n4. Press 'Escape' to exit from game";
+    cout << "\n\nPress any key to go back to menu";
+    getch();
 }
-
 int main() {
     int choice;
 
