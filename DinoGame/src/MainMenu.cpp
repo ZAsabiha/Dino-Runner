@@ -26,14 +26,36 @@ void play() {
 
 void instructions() {
     system("cls");
-    cout << "Instructions";
-    cout << "\n----------------";
-    cout << "\n1. Avoid hurdles by jumping";
-    cout << "\n2. Press 'Spacebar' to jump";
-    cout << "\n3. Press 'Esc' to exit";
-    cout << "\nPress any key to go back to menu.";
+
+    gotoxy(50, 6);
+    cout << "\033[36m ___           _                   _   _                 \033[0m";
+    gotoxy(50, 7);
+    cout << "\033[32m|_ _|_ __  ___| |_ _ __ _   _  ___| |_(_) ___  _ __  ___ \033[0m";
+    gotoxy(50, 8);
+    cout << "\033[33m | || '_ \\/ __| __| '__| | | |/ __| __| |/ _ \\| '_ \\/ __|\033[0m";
+    gotoxy(50, 9);
+    cout << "\033[35m | || | | \\__ \\ |_| |  | |_| | (__| |_| | (_) | | | \\__ \\ \033[0m";
+    gotoxy(50, 10);
+    cout << "\033[31m|___|_| |_|___/\\__|_|   \\__,_|\\___|\\__|_|\\___/|_| |_|___/\033[0m";
+    gotoxy(50, 11);
+    cout << "\033[34m---------------------------------------------------------\033[0m";
+
+ 
+     gotoxy(50, 15);
+    cout << "\033[31m1. Avoid hurdles by jumping\033[0m"; //Red
+    gotoxy(50, 18);
+    cout << "\033[32m2. Press 'Spacebar' to jump\033[0m"; // Green
+    gotoxy(50, 21);
+    cout << "\033[34m3. Press 'Esc' to exit\033[0m";      // Blue
+    gotoxy(50, 24);
+    cout << "\033[33m4. Collect coins for extra points\033[0m"; // Yellow
+
+
+    gotoxy(90, 35);
+    cout << "\033[36mPress any key to go back to the menu.\033[0m"; // Cyan
     getch();
 }
+
 
 void selectDino() {
     system("cls");
