@@ -18,6 +18,7 @@ void gotoxy(int x, int y) {
 void moveDino(int jump = 0) {
     static int foot = 0;
 
+ 
     if (jump == 0)
         dinoY = 0;
     else if (jump == 2)
@@ -25,25 +26,39 @@ void moveDino(int jump = 0) {
     else
         dinoY++;
 
-    gotoxy(dinoPos, 10 - dinoY); cout << "      ";
-    gotoxy(dinoPos, 11 - dinoY); cout << "  ██  ";
-    gotoxy(dinoPos, 12 - dinoY); cout << " ████ ";
-    gotoxy(dinoPos, 13 - dinoY); cout << " █ ██ ";
-    gotoxy(dinoPos, 14 - dinoY); cout << " ████ ";
 
-    gotoxy(dinoPos, 15 - dinoY);
+    gotoxy(dinoPos, 15 - dinoY); cout << "                      ";
+    gotoxy(dinoPos, 16 - dinoY); cout << "             █████  ";
+    gotoxy(dinoPos, 17 - dinoY); cout << "            ███░░██";
+    gotoxy(dinoPos, 18 - dinoY); cout << "           ██████░░";
+    gotoxy(dinoPos, 19 - dinoY); cout << "  █          ███";
+    gotoxy(dinoPos, 20 - dinoY); cout << "  ██         ███ ";
+    gotoxy(dinoPos, 21 - dinoY); cout << "   ███     █████          ";
+    gotoxy(dinoPos, 22 - dinoY); cout << "     ██████████          ";
+    gotoxy(dinoPos, 23 - dinoY); cout << "    ██████████          ";
+  
+ 
+
+    
+   
+    gotoxy(dinoPos, 24 - dinoY);
     if (jump == 1 || jump == 2) {
-        cout << "  ██  ";
+        cout << "    █    █       ";
+        gotoxy(dinoPos, 25 - dinoY);
+        cout << "    ██  ██     ";
     } 
     else if (foot == 0) {
-        cout << "  █   ";
+        cout << "    ██    ██   ";
+        gotoxy(dinoPos, 25 - dinoY);
+        cout << "        ██       ";
         foot = 1;
     } else {
-        cout << "  ██  ";
+        cout << "    ██    ██   ";
+        gotoxy(dinoPos, 25 - dinoY);
+        cout << "    ██    ██   ";
         foot = 0;
     }
 }
-
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
