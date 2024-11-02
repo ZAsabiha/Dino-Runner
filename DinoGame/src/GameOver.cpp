@@ -6,22 +6,27 @@ using namespace std;
 
 class GameOverScreen {
 public:
-    void display() {
-        clearScreen(); 
+   void displayGameOver() {
+    clearScreen(); 
 
-        gotoxy(30, 10); 
-        cout << "\033[1;31m" << "   _____                                 ____                        \n";
-        gotoxy(30, 11); cout << "  / ____|                               / __ \\                       \n";
-        gotoxy(30, 12); cout << " | |  __    __ _   _ __ ___     ___    | |  | | __   __   ___   _ __ \n";
-        gotoxy(30, 13); cout << " | | |_ |  / _` | | '_ ` _ \\   / _ \\   | |  | | \\ \\ / /  / _ \\ | '__|\n";
-        gotoxy(30, 14); cout << " | |__| | | (_| | | | | | | | |  __/   | |__| |  \\ V /  |  __/ | |   \n";
-        gotoxy(30, 15); cout << "  \\_____|  \\__,_| |_| |_| |_|  \\___|    \\____/    \\_/    \\___| |_|   \n";
+   
+    gotoxy(50, 6);
+    cout << "\033[1;31m   ____                         ___                  \033[0m";
+    gotoxy(50, 7);
+    cout << "\033[1;31m  / ___| __ _ _ __ ___   ___   / _ \\__   _____ _ __  \033[0m";
+    gotoxy(50, 8);
+    cout << "\033[1;31m | |  _ / _` | '_ ` _ \\ / _ \\ | | | \\ \\ / / _ \\ '__| \033[0m";
+    gotoxy(50, 9);
+    cout << "\033[1;31m | |_| | (_| | | | | | |  __/ | |_| |\\ V /  __/ |    \033[0m";
+    gotoxy(50, 10);
+    cout << "\033[1;31m  \\____|\\__,_|_| |_| |_|\\___|  \\___/  \\_/ \\___|_|    \033[0m";
 
-        gotoxy(60, 30);
-        cout << "\033[1;33m" << "Press any key to continue..." << "\033[0m"; // Yellow color
+  "
+    gotoxy(90, 35); 
+    cout << "\033[1;33mPress any key to continue...\033[0m"; // Yellow color
 
-        getch(); 
-    }
+    getch(); 
+}
 
 private:
     void gotoxy(int x, int y) {
