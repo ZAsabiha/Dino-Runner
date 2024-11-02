@@ -20,4 +20,4 @@ private:
     void drawDino(int jump);
 };
 
-#endif 
+
