@@ -1,72 +1,65 @@
-#include <iostream>
+#include "ScoreManager.h"
 #include <fstream>
-#include <string>
 
-class ScoreManager {
-private:
-    int currentScore;
-    int highScore;
-    std::string filename;
+ScoreManager::ScoreManager(const std::string& file) : filename(file), currentScore(0), highScore(0) {
+    loadHighScore();
+}
 
-public:
-    ScoreManager(const std::string& file) : filename(file), currentScore(0), highScore(0) {
-        loadHighScore();
+void ScoreManager::resetScore() {
+    currentScore = 0;
+}
+
+void ScoreManager::incrementScore() {
+    currentScore++;
+}
+
+int ScoreManager::getCurrentScore() const {
+    return currentScore;
+}
+
+int ScoreManager::getHighScore() const {
+    return highScore;
+}
+
+void ScoreManager::checkAndSetHighScore() {
+    if (currentScore > highScore) {
+        highScore = currentScore;
+        saveHighScore();
     }
+}
 
-    void resetScore() {
-        currentScore = 0;
+void ScoreManager::loadHighScore() {
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        file >> highScore;
+        file.close();
     }
+}
 
-    void incrementScore() {
-        currentScore++;
+void ScoreManager::saveHighScore() {
+    std::ofstream file(filename);
+    if (file.is_open()) {
+        file << highScore;
+        file.close();
     }
-
-    int getCurrentScore() const {
-        return currentScore;
-    }
-
-    int getHighScore() const {
-        return highScore;
-    }
-
-    void checkAndSetHighScore() {
-        if (currentScore > highScore) {
-            highScore = currentScore;
-            saveHighScore();
-        }
-    }
-
-    void displayScores() const {
-        std::cout << "Current Score: " << currentScore << std::endl;
-        std::cout << "Highest Score: " << highScore << std::endl;
-    }
-
-private:
-    void loadHighScore() {
-        std::ifstream file(filename);
-        if (file.is_open()) {
-            file >> highScore;
-            file.close();
-        }
-    }
-
-    void saveHighScore() {
-        std::ofstream file(filename);
-        if (file.is_open()) {
-            file << highScore;
-            file.close();
-        }
-    }
-};
+}
 
 int main() {
     ScoreManager scoreManager("highscore.txt");
 
-    scoreManager.incrementScore();
-    scoreManager.displayScores();
+   
+    scoreManager.incrementScore();  
+    int previousHighScore = scoreManager.getHighScore();  
+
 
     scoreManager.checkAndSetHighScore();
-    scoreManager.displayScores();
+
+    
+    printf("\nGame Over!\n");
+    printf("Your Score: %d\n", scoreManager.getCurrentScore());
+    printf("Previous Highest Score: %d\n", previousHighScore);
+    printf("New Highest Score: %d\n", scoreManager.getHighScore());
 
     return 0;
 }
+
