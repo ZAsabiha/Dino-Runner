@@ -21,8 +21,91 @@ void clearScreen() {
 }
 
 void play() {
-   cout<<"Game playing .... just for test";
+    system("cls");
+    char ch;
+    int jumpHeight;
+    int missileX = 15, missileY = -1;  
+    bool missileActive = false;        
+    bool isVertical = false;           
+    bool isDucking = false;           
+
+    while (true) {
+        while (!kbhit()) {
+            if (gameover == 1) {
+                return;
+            }
+
+            
+            score();
+            moveDino(0, isDucking);  
+            drawHurdle(missileX, missileY, missileActive, isDucking);  
+            drawClouds();
+
+            
+            if (missileActive) {
+                moveProjectile(missileX, missileY, missileActive, isVertical); 
+                drawProjectile(missileX, missileY, missileActive, isVertical);
+            }
+
+            Sleep(100);  
+        }
+
+        ch = getch();
+
+     
+        if (ch == 's' || ch == 'S' && !isDucking) {  
+            jumpHeight = 0;
+            while (jumpHeight < 12) {
+                moveDino(1, isDucking);  
+                drawHurdle(missileX, missileY, missileActive, isDucking);
+                jumpHeight++;
+            }
+            while (jumpHeight > 0) {
+                moveDino(2, isDucking);  
+                drawHurdle(missileX, missileY, missileActive, isDucking);
+                jumpHeight--;
+            }
+        } 
+
+        
+        else if (ch == 'f' || ch == 'F') {  
+            if (!missileActive) {  
+                isVertical = false; 
+                missileY = 29; 
+                fireProjectile(missileX, missileY, missileActive, isVertical);  
+            }
+        }
+
+        
+        else if (ch == 'v' || ch == 'V') {  
+            if (!missileActive) {  
+                isVertical = true; 
+                missileY = 21; 
+                fireProjectile(missileX, missileY, missileActive, isVertical);  
+            }
+        }
+
+        
+        else if (ch == 'd' || ch == 'D') {  
+            isDucking = true;  
+        }
+
+        else if (ch == 'w' || ch == 'W') {  
+            isDucking = false;  
+        }
+
+     
+        else if (ch == 'p' || ch == 'P') {  
+            getch();  
+        }
+
+       
+        else if (ch == 27) {  
+            break;
+        }
+    }
 }
+
 
 void instructions() {
     system("cls");
@@ -41,18 +124,18 @@ void instructions() {
     cout << "\033[34m---------------------------------------------------------\033[0m";
 
  
-     gotoxy(50, 15);
-    cout << "\033[31m1. Avoid hurdles by jumping\033[0m"; //Red
+     gotoxy(50, 15)
+    cout << "\033[31m1. Avoid hurdles by jumping\033[0m"; 
     gotoxy(50, 18);
-    cout << "\033[32m2. Press 'Spacebar' to jump\033[0m"; // Green
+    cout << "\033[32m2. Press 'Spacebar' to jump\033[0m"; 
     gotoxy(50, 21);
-    cout << "\033[34m3. Press 'Esc' to exit\033[0m";      // Blue
+    cout << "\033[34m3. Press 'Esc' to exit\033[0m";      
     gotoxy(50, 24);
-    cout << "\033[33m4. Collect coins for extra points\033[0m"; // Yellow
+    cout << "\033[33m4. Collect coins for extra points\033[0m"; 
 
 
     gotoxy(90, 35);
-    cout << "\033[36mPress any key to go back to the menu.\033[0m"; // Cyan
+    cout << "\033[36mPress any key to go back to the menu.\033[0m"; 
     getch();
 }
 
