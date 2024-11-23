@@ -64,7 +64,7 @@ void saveHighScore() {
 void init() {
     system("cls");
     gameover = 0;
-    gotoxy(3, 2); cout << "SCORE : "<< score;
+    gotoxy(3, 2); cout << "SCORE : "<< ;
     gotoxy(30, 2); cout << "LIVES: " << lives;
     for (int i = 0; i < 79; i++) {
         gotoxy(1 + i, 1); cout << "п";
@@ -185,10 +185,9 @@ void displayGameOver() {
 
 void drawHurdleAndPowerUp() {
     static int plantX = 0;
-    static int obstacleType = rand() % 3; // Randomize obstacle type (0: plant, 1: rock, 2: pterosaur)
+    static int obstacleType = rand() % 3;
     static int score = 0;
 
-        // Collision detection based on obstacle type and position
        if (plantX == 56 && dinoY < 3) {
         lives--;
         gotoxy(30, 2); cout << "LIVES: " << lives;
@@ -203,9 +202,9 @@ void drawHurdleAndPowerUp() {
     }
 
 
-    // Erase previous obstacle by printing spaces at the previous position
+   
     switch (obstacleType) {
-        case 0: // Plant obstacle
+        case 0: 
             gotoxy(hurdlePos - plantX + 1, 26); cout << "      ";
             gotoxy(hurdlePos - plantX + 1, 27); cout << "      ";
             gotoxy(hurdlePos - plantX + 1, 28); cout << "      ";
@@ -214,13 +213,13 @@ void drawHurdleAndPowerUp() {
             gotoxy(hurdlePos - plantX + 1, 31); cout << "      ";
             break;
 
-        case 1: // Rock obstacle
+        case 1: 
             gotoxy(hurdlePos - plantX + 1, 29); cout << "      ";
             gotoxy(hurdlePos - plantX + 1, 30); cout << "      ";
             gotoxy(hurdlePos - plantX + 1, 31); cout << "      ";
             break;
 
-        case 2: // Flying pterosaur obstacle 
+        case 2:  
             gotoxy(hurdlePos - plantX + 1, 24); cout << "         "; 
             gotoxy(hurdlePos - plantX + 1, 25); cout << "         ";
             gotoxy(hurdlePos - plantX + 1, 26); cout << "         ";
@@ -228,9 +227,9 @@ void drawHurdleAndPowerUp() {
             break;
     }
 
-    // Draw the current obstacle based on obstacleType
+    
     switch (obstacleType) {
-        case 0: // Plant obstacle
+        case 0: 
             gotoxy(hurdlePos - plantX, 26); cout << "\033[1;31m█  █  \033[0m";
             gotoxy(hurdlePos - plantX, 27); cout << "\033[1;31m█  █  \033[0m";
             gotoxy(hurdlePos - plantX, 28); cout << "\033[1;31m████  \033[0m";
@@ -239,13 +238,13 @@ void drawHurdleAndPowerUp() {
             gotoxy(hurdlePos - plantX, 31); cout << "\033[1;31m  █   \033[0m";
             break;
 
-        case 1: // Rock obstacle
+        case 1: 
             gotoxy(hurdlePos - plantX, 29); cout << "\033[1;34m███   \033[0m";
             gotoxy(hurdlePos - plantX, 30); cout << "\033[1;34m████  \033[0m";
             gotoxy(hurdlePos - plantX, 31); cout << "\033[1;34m ███  \033[0m";
             break;
 
-        case 2: // Flying pterosaur obstacle (updated design)
+        case 2: 
             gotoxy(hurdlePos - plantX, 24); cout << "\033[1;32m   ██     \033[0m";
             gotoxy(hurdlePos - plantX, 25); cout << "\033[1;32m ██████   \033[0m";
             gotoxy(hurdlePos - plantX, 26); cout << "\033[1;32m██   ████ \033[0m";
@@ -302,7 +301,7 @@ void drawHurdleAndPowerUp() {
             speed--;
         }
 
-        // Randomize next obstacle type
+        
         obstacleType = rand() % 3;
     }
 }
@@ -488,4 +487,3 @@ int main() {
     mainMenu();
     return 0;
 }
-    
