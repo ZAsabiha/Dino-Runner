@@ -64,7 +64,8 @@ void saveHighScore() {
 void init() {
     system("cls");
     gameover = 0;
-    gotoxy(40, 2); cout << "LIVES: " << lives;
+    gotoxy(40, 2); 
+    cout << "\033[1;31mLIVES: \033[1;32m" << lives << "\033[0m";
    
     loadHighScore();
 }
@@ -186,7 +187,14 @@ void drawHurdleAndPowerUp() {
 
        if (plantX == 56 && dinoY < 3) {
         lives--;
-        gotoxy(40, 2); cout << "LIVES: " << lives;
+        gotoxy(40, 2); 
+       if(lives == 3) {
+        cout << "\033[1;31mLIVES: \033[1;32m" << lives << "\033[0m";  
+    } else if(lives == 2) {
+        cout << "\033[1;31mLIVES: \033[1;33m" << lives << "\033[0m"; 
+    } else if(lives == 1) {
+        cout << "\033[1;31mLIVES: \033[1;31m" << lives << "\033[0m";  
+    }
 
         if (lives == 0) {
             gameover = 1;
@@ -267,7 +275,14 @@ void drawHurdleAndPowerUp() {
         if (powerUpX == dinoPos && dinoY < 3) {
             if (currentPowerUp == 'P' && lives < 3) {
                 lives++;
-                gotoxy(30, 2); cout << "LIVES: " << lives;
+                gotoxy(40, 2);
+                if(lives == 3) {
+        cout << "\033[1;31mLIVES: \033[1;32m" << lives << "\033[0m";
+    } else if(lives == 2) {
+        cout << "\033[1;31mLIVES: \033[1;33m" << lives << "\033[0m";
+    } else if(lives == 1) {
+        cout << "\033[1;31mLIVES: \033[1;31m" << lives << "\033[0m";
+    }
             } else if (currentPowerUp == 'I') {
                 currentScore += 10; 
                 gotoxy(11, 2); cout << currentScore;
