@@ -14,7 +14,7 @@ HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 COORD CursorPosition;
 
 int dinoY;
-int speed = 30;
+int speed = 40;
 int gameover = 0;
 int currentScore = 0;
 int highScore = 0;
@@ -64,12 +64,8 @@ void saveHighScore() {
 void init() {
     system("cls");
     gameover = 0;
-    gotoxy(3, 2); cout << "SCORE : "<< ;
-    gotoxy(30, 2); cout << "LIVES: " << lives;
-    for (int i = 0; i < 79; i++) {
-        gotoxy(1 + i, 1); cout << "п";
-        gotoxy(1 + i, 25); cout << "п";
-    }
+    gotoxy(40, 2); cout << "LIVES: " << lives;
+   
     loadHighScore();
 }
 
@@ -186,15 +182,14 @@ void displayGameOver() {
 void drawHurdleAndPowerUp() {
     static int plantX = 0;
     static int obstacleType = rand() % 3;
-    static int score = 0;
+    
 
        if (plantX == 56 && dinoY < 3) {
         lives--;
-        gotoxy(30, 2); cout << "LIVES: " << lives;
+        gotoxy(40, 2); cout << "LIVES: " << lives;
 
         if (lives == 0) {
             gameover = 1;
-            currentScore = score;
             displayGameOver();
             getch();
             return;
@@ -291,11 +286,10 @@ void drawHurdleAndPowerUp() {
 
     if (plantX == 73) {
         plantX = 0;
-        score++;
-        currentScore = score;
+        currentScore++;
 
         gotoxy(11, 2); cout << "     ";
-        gotoxy(11, 2); cout << score;
+        gotoxy(11, 2); cout << currentScore;
 
         if (speed > 30) {
             speed--;
@@ -308,13 +302,9 @@ void drawHurdleAndPowerUp() {
 
 
 void score() {
-  
-
     gameover = 0;
-    gotoxy(3, 2);
-cout << "\033[1;32mSCORE :\033[0m"; 
-
-
+    gotoxy(11, 2);
+    cout << "\033[1;32mSCORE: " << currentScore << "\033[0m";
 }
 
 
