@@ -22,8 +22,25 @@ public:
     cout << "\033[1;31m  \\____|\\__,_|_| |_| |_|\\___|  \\___/  \\_/ \\___|_|    \033[0m";
 
   "
+  gotoxy(50, 20); 
+    cout << "\033[1;32mYour Score: \033[0m" << currentScore;  
+    gotoxy(50, 24);
+    cout << "\033[1;36mPrevious High Score: \033[0m" << highScore;  
+
+   
+    if (currentScore > highScore) {
+        highScore = currentScore;
+        saveHighScore();  
+        gotoxy(50, 27); 
+        cout << "\033[1;33mNew High Score!\033[0m";  
+    } else {
+        gotoxy(50, 28);
+        cout << "\033[1;33mTry Again to Beat the High Score!\033[0m";  
+    }
+
+   
     gotoxy(90, 35); 
-    cout << "\033[1;33mPress any key to continue...\033[0m"; // Yellow color
+    cout << "\033[1;33mPress any key to continue...\033[0m";  
 
     getch(); 
 }
