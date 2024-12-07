@@ -166,99 +166,211 @@ void displayGameOver() {
     getch();
 }
 
-void drawHurdle() {
-    static int plantX = 0;
-    static int obstacleType = rand() % 3; // Randomize obstacle type (0: plant, 1: rock, 2: pterosaur)
+void drawHurdle(int missileX, int missileY, bool &missileActive, bool isDucking) {
+     static int plantX = 0;
+    static int obstacleType = rand() % 3;
     static int score = 0;
+    
 
-        // Collision detection based on obstacle type and position
        if (plantX == 56 && dinoY < 3) {
+        lives--;
+        gotoxy(40, 2); 
+       if(lives == 3) {
+        cout << "\033[1;31mLIVES: \033[1;32m" << lives << "\033[0m";  
+    } else if(lives == 2) {
+        cout << "\033[1;31mLIVES: \033[1;33m" << lives << "\033[0m"; 
+    } else if(lives == 1) {
+        cout << "\033[1;31mLIVES: \033[1;31m" << lives << "\033[0m";  
+    }
+
+        if (lives == 0) {
+            gameover = 1;
+            displayGameOver();
+            getch();
+            return;
+        }
+    }
+
+    int dinoHeight = isDucking ? 2 : 5; 
+    int dinoHitboxY = isDucking ? 29 : 22; 
+
+    
+    if (!isDucking && plantX == 57 && dinoY < dinoHeight) {
         gameover = 1;
         currentScore = score;
         displayGameOver();
         return;
     }
 
+   
+    int hurdleX = hurdlePos - plantX;
+    if (missileActive) {
+        if (!isDucking) {
+           
+            if (missileX >= hurdleX && missileX <= hurdleX + 3 && missileY >= 26 && missileY <= 31) {
+                missileActive = false;
+                plantX = 0;  
+                score++;  
+                currentScore = score;
 
-    // Erase previous obstacle by printing spaces at the previous position
-    switch (obstacleType) {
-        case 0: // Plant obstacle
-            gotoxy(hurdlePos - plantX + 1, 26); cout << "      ";
-            gotoxy(hurdlePos - plantX + 1, 27); cout << "      ";
-            gotoxy(hurdlePos - plantX + 1, 28); cout << "      ";
-            gotoxy(hurdlePos - plantX + 1, 29); cout << "      ";
-            gotoxy(hurdlePos - plantX + 1, 30); cout << "      ";
-            gotoxy(hurdlePos - plantX + 1, 31); cout << "      ";
-            break;
+                
+                for (int i = 26; i <= 31; i++) {
+                    gotoxy(hurdleX, i);
+                    cout << "      ";
+                }
 
-        case 1: // Rock obstacle
-            gotoxy(hurdlePos - plantX + 1, 29); cout << "      ";
-            gotoxy(hurdlePos - plantX + 1, 30); cout << "      ";
-            gotoxy(hurdlePos - plantX + 1, 31); cout << "      ";
-            break;
+              
+                gotoxy(11, 2);
+                cout << "     ";
+                gotoxy(11, 2);
+                cout << score;
 
-        case 2: // Flying pterosaur obstacle 
-            gotoxy(hurdlePos - plantX + 1, 24); cout << "         "; 
-            gotoxy(hurdlePos - plantX + 1, 25); cout << "         ";
-            gotoxy(hurdlePos - plantX + 1, 26); cout << "         ";
-            gotoxy(hurdlePos - plantX + 1, 27); cout << "         ";
-            break;
-    }
+              
+                if (speed > 30) {
+                    speed--;
+                }
 
-    // Draw the current obstacle based on obstacleType
-    switch (obstacleType) {
-        case 0: // Plant obstacle
-            gotoxy(hurdlePos - plantX, 26); cout << "\033[1;31m█  █  \033[0m";
-            gotoxy(hurdlePos - plantX, 27); cout << "\033[1;31m█  █  \033[0m";
-            gotoxy(hurdlePos - plantX, 28); cout << "\033[1;31m████  \033[0m";
-            gotoxy(hurdlePos - plantX, 29); cout << "\033[1;31m  █   \033[0m";
-            gotoxy(hurdlePos - plantX, 30); cout << "\033[1;31m  █   \033[0m";
-            gotoxy(hurdlePos - plantX, 31); cout << "\033[1;31m  █   \033[0m";
-            break;
+             
+                obstacleType = rand() % 3;
+                return;
+            }
+        } else {
+        
+            if (missileX >= hurdleX && missileX <= hurdleX + 5 && missileY >= 20 && missileY <= 23) {
+                missileActive = false;
+                plantX = 0;  
+                score++;  
+                currentScore = score;
 
-        case 1: // Rock obstacle
-            gotoxy(hurdlePos - plantX, 29); cout << "\033[1;34m███   \033[0m";
-            gotoxy(hurdlePos - plantX, 30); cout << "\033[1;34m████  \033[0m";
-            gotoxy(hurdlePos - plantX, 31); cout << "\033[1;34m ███  \033[0m";
-            break;
+               
+                for (int i = 20; i <= 23; i++) {
+                    gotoxy(hurdleX, i);
+                    cout << "         ";
+                }
 
-        case 2: // Flying pterosaur obstacle (updated design)
-            gotoxy(hurdlePos - plantX, 24); cout << "\033[1;32m   ██     \033[0m";
-            gotoxy(hurdlePos - plantX, 25); cout << "\033[1;32m ██████   \033[0m";
-            gotoxy(hurdlePos - plantX, 26); cout << "\033[1;32m██   ████ \033[0m";
-            gotoxy(hurdlePos - plantX, 27); cout << "\033[1;32m  ████    \033[0m";
-            break;
+                
+                gotoxy(11, 2);
+                cout << "     ";
+                gotoxy(11, 2);
+                cout << score;
+
+               
+                if (speed > 30) {
+                    speed--;
+                }
+
+                obstacleType = rand() % 3;
+                return;
+            }
+        }
     }
 
     
-    plantX++;
+    switch (obstacleType) {
+        case 0: 
+            gotoxy(hurdleX, 26); cout << "      ";
+            gotoxy(hurdleX, 27); cout << "      ";
+            gotoxy(hurdleX, 28); cout << "      ";
+            gotoxy(hurdleX, 29); cout << "      ";
+            gotoxy(hurdleX, 30); cout << "      ";
+            gotoxy(hurdleX, 31); cout << "      ";
+            break;
+        case 1: 
+            gotoxy(hurdleX, 29); cout << "      ";
+            gotoxy(hurdleX, 30); cout << "      ";
+            gotoxy(hurdleX, 31); cout << "      ";
+            break;
+        case 2: 
+            gotoxy(hurdleX, 20); cout << "         ";
+            gotoxy(hurdleX, 21); cout << "         ";
+            gotoxy(hurdleX, 22); cout << "         ";
+            gotoxy(hurdleX, 23); cout << "         ";
+            break;
+    }
 
+   
+    switch (obstacleType) {
+        case 0: 
+            gotoxy(hurdleX, 26); cout << "\033[1;31m█  █  \033[0m";
+            gotoxy(hurdleX, 27); cout << "\033[1;31m█  █  \033[0m";
+            gotoxy(hurdleX, 28); cout << "\033[1;31m████  \033[0m";
+            gotoxy(hurdleX, 29); cout << "\033[1;31m  █   \033[0m";
+            gotoxy(hurdleX, 30); cout << "\033[1;31m  █   \033[0m";
+            gotoxy(hurdleX, 31); cout << "\033[1;31m  █   \033[0m";
+            break;
+
+        case 1: 
+            gotoxy(hurdleX, 29); cout << "\033[1;34m███   \033[0m";
+            gotoxy(hurdleX, 30); cout << "\033[1;34m████  \033[0m";
+            gotoxy(hurdleX, 31); cout << "\033[1;34m ███  \033[0m";
+            break;
+
+        case 2: 
+            gotoxy(hurdleX, 21); cout << "\033[1;33m ██████   \033[0m";
+            gotoxy(hurdleX, 22); cout << "\033[1;33m██    ████ \033[0m";
+            gotoxy(hurdleX, 23); cout << "\033[1;33m  █████    \033[0m";
+            break;
+    }
+    if (powerUpX == -1 && rand() % 50 == 0) {
+        powerUpX = hurdlePos;
+        
+        
+        int randomPowerUp = rand() % 3;
+        if (randomPowerUp == 0) currentPowerUp = 'P'; 
+        else if (randomPowerUp == 1) currentPowerUp = 'I'; 
+        else currentPowerUp = 'S'; 
+    }
+
+    
+    if (powerUpX != -1) {
+        gotoxy(powerUpX, 19); cout << " " << currentPowerUp << " ";
+        powerUpX--;
+
+        
+        if (powerUpX == dinoPos && dinoY < 3) {
+            if (currentPowerUp == 'P' && lives < 3) {
+                lives++;
+                gotoxy(40, 2);
+                if(lives == 3) {
+        cout << "\033[1;31mLIVES: \033[1;32m" << lives << "\033[0m";
+    } else if(lives == 2) {
+        cout << "\033[1;31mLIVES: \033[1;33m" << lives << "\033[0m";
+    } else if(lives == 1) {
+        cout << "\033[1;31mLIVES: \033[1;31m" << lives << "\033[0m";
+    }
+            } else if (currentPowerUp == 'I') {
+                currentScore += 10; 
+                gotoxy(11, 2); cout << currentScore;
+            } else if (currentPowerUp == 'S') {
+                speed -= 5; 
+                if (speed < 20) speed = 20;
+            }
+            powerUpX = -1; 
+        }
+
+        if (powerUpX < 0) powerUpX = -1;
+    }
+   
+    plantX++;
     if (plantX == 73) {
-        plantX = 0;
-        score++;
+        plantX = 0;  
+        score++; 
         currentScore = score;
 
-        gotoxy(11, 2); cout << "     ";
-        gotoxy(11, 2); cout << score;
+        
+        gotoxy(11, 2);
+        cout << "     ";
+        gotoxy(11, 2);
+        cout << score;
 
+        
         if (speed > 30) {
             speed--;
         }
 
-        // Randomize next obstacle type
+        
         obstacleType = rand() % 3;
     }
-}
-
-
-void score() {
-  
-
-    gameover = 0;
-    gotoxy(3, 2);
-cout << "\033[1;32mSCORE :\033[0m"; 
-
-
 }
 
 
