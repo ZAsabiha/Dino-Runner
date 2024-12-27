@@ -389,41 +389,160 @@ void drawClouds() {
     gotoxy(75, 6); cout << "\033[1;35m (_   _    _) \033[0m"; 
     gotoxy(75, 7); cout << "\033[1;35m   (_) (__)   \033[0m"; 
 }
+void shopMenu() {
+    while (true) {
+        system("cls");
+        gotoxy(55, 10); cout << "\033[1;36mWelcome to the Shop!\033[0m";
+        gotoxy(55, 13); cout << "Your Score: " << currentScore;
+        gotoxy(55, 15); cout << "\033[1;31m1. Buy Extra Life (Cost: 10 points)\033[0m";
+        gotoxy(55, 17); cout << "\033[1;32m2. Buy Speed Boost (Cost: 5 points)\033[0m";
+        gotoxy(55, 19); cout << "\033[1;33m3. Buy Shield (Cost: 15 points)\033[0m";
+        gotoxy(55, 21); cout << "\033[1;34m4. Back to Game\033[0m";
+        gotoxy(55, 23); cout << "Select an option: ";
+
+        char option;
+        cin >> option;
+
+        switch (option) {
+            case '1':
+                if (currentScore >= 10) {
+                    lives++; 
+                    currentScore -= 10;
+                    gotoxy(55, 25); cout << "\033[1;32mExtra life purchased!\033[0m";
+                } else {
+                    gotoxy(55, 25); cout << "\033[1;31mNot enough points!\033[0m";
+                }
+                break;
+            case '2':
+                if (currentScore >= 5) {
+                    speed = max(speed - 5, 20); 
+                    currentScore -= 5;
+                    gotoxy(55, 25); cout << "\033[1;32mSpeed boost purchased!\033[0m";
+                } else {
+                    gotoxy(55, 25); cout << "\033[1;31mNot enough points!\033[0m";
+                }
+                break;
+            case '3':
+                if (currentScore >= 15) {
+                    // Implement shield logic here
+                    gotoxy(55, 25); cout << "\033[1;32mShield purchased! (Implement logic)\033[0m";
+                    currentScore -= 15;
+                } else {
+                    gotoxy(55, 25); cout << "\033[1;31mNot enough points!\033[0m";
+                }
+                break;
+            case '4':
+                return; 
+            default:
+                gotoxy(55, 25); cout << "\033[1;31mInvalid option! Please try again.\033[0m";
+                break;
+        }
+        getch(); 
+    }
+}
 
 void play() {
     clearScreen();
+    system("cls");
+    init();
+    currentScore = 0;
+    lives = 3;
     char ch;
-    int i;
-    
+ 
+    int jumpHeight;
+    int missileX = 15, missileY = -1;  
+    bool missileActive = false;        
+    bool isVertical = false;          
+    bool isDucking = false;            
+
     while (true) {
         while (!kbhit()) {
             if (gameover == 1) {
                 return;
             }
+
+           
             score();
-            moveDino();
-            drawHurdle();
+            moveDino(0,isDucking);  
+            drawHurdle(missileX, missileY, missileActive, isDucking);  
             drawClouds();
+
+            
+            if (missileActive) {
+                moveProjectile(missileX, missileY, missileActive, isVertical); 
+                drawProjectile(missileX, missileY, missileActive, isVertical);
+            }
+
+            Sleep(100);  
         }
+
         ch = getch();
-        if (ch == 32) {
-            i = 0;
-            while (i < 12) {
-                moveDino(1);
-                drawHurdle();
-                i++;
+
+        
+        if (ch == 's' || ch == 'S' && !isDucking) {  
+            jumpHeight = 0;
+            while (jumpHeight < 12) {
+                moveDino(1, isDucking);  
+                drawHurdle(missileX, missileY, missileActive, isDucking);
+                jumpHeight++;
             }
-            while (i > 0) {
-                moveDino(2);
-                drawHurdle();
-                i--;
+            while (jumpHeight > 0) {
+                moveDino(2, isDucking); 
+                drawHurdle(missileX, missileY, missileActive, isDucking);
+                jumpHeight--;
             }
-        } else if (ch == 'p' || ch == 'P')
-            getch();
-        else if (ch == 27)
+        } 
+
+       
+        else if (ch == 'f' || ch == 'F') {  
+            if (!missileActive) {  
+                isVertical = false; 
+                missileY = 29; 
+                fireProjectile(missileX, missileY, missileActive, isVertical);  
+            }
+        }
+
+      
+        else if (ch == 'v' || ch == 'V') {  
+            if (!missileActive) {  
+                isVertical = true; 
+                missileY = 21; 
+                fireProjectile(missileX, missileY, missileActive, isVertical);  
+            }
+        }
+
+       
+        else if (ch == 'd' || ch == 'D') {  
+            isDucking = true;  
+        }
+
+        
+        else if (ch == 'w' || ch == 'W') {  
+            isDucking = false;  
+        }
+
+        
+        else if (ch == 'p' || ch == 'P') {  
+            getch();  
+        }
+
+        
+        else if (ch == 'c' || ch == 'C') {  
+            shopMenu();  
+            clearScreen();  
+            init();  
+        }
+
+        
+        else if (ch == 27) {  
             break;
+        }
     }
 }
+
+
+
+
 void instructions() {
     clearScreen();
 
