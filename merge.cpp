@@ -3,6 +3,7 @@
 #include <fstream> 
 #include <windows.h>
 #include<stdlib.h>
+#include <time.h>
 
 #define dinoPos 2
 #define hurdlePos 74
@@ -13,11 +14,12 @@ HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 COORD CursorPosition;
 
 int dinoY;
-int speed = 30;
+int speed = 20;
 int gameover = 0;
 int currentScore = 0;
 int highScore = 0;
-
+int lives = 3; 
+int powerUpX = -1; 
 void gotoxy(int x, int y) {
     COORD coord;
     coord.X = x;
@@ -533,7 +535,6 @@ void play() {
         }
     }
 }
-
 
 
 
