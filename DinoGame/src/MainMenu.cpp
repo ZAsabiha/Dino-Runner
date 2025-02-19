@@ -21,86 +21,110 @@ void clearScreen() {
 }
 
 void play() {
+    clearScreen();
     system("cls");
+    init();
+    currentScore = 0;
+    lives = 3;
     char ch;
     int jumpHeight;
     int missileX = 15, missileY = -1;  
     bool missileActive = false;        
-    bool isVertical = false;           
-    bool isDucking = false;           
+    bool isVertical = false;          
+    bool isDucking = false; 
+    bool isBigJump = false;           
 
     while (true) {
         while (!kbhit()) {
-            if (gameover == 1) {
-                return;
-            }
+            if (gameover == 1) return;
 
-            
             score();
             moveDino(0, isDucking);  
             drawHurdle(missileX, missileY, missileActive, isDucking);  
             drawClouds();
 
-            
             if (missileActive) {
                 moveProjectile(missileX, missileY, missileActive, isVertical); 
                 drawProjectile(missileX, missileY, missileActive, isVertical);
             }
 
-            Sleep(100);  
+            Sleep(100);
         }
 
+       
         ch = getch();
-
-     
+        
         if (ch == 's' || ch == 'S' && !isDucking) {  
             jumpHeight = 0;
-            while (jumpHeight < 12) {
-                moveDino(1, isDucking);  
-                drawHurdle(missileX, missileY, missileActive, isDucking);
-                jumpHeight++;
+            if (isBigJump) {  
+               
+                while (jumpHeight < 24) {  
+                    moveDino(1, isDucking);  
+                    drawHurdle(missileX, missileY, missileActive, isDucking);
+                    jumpHeight++;
+                }
+                isBigJump = false;  
+            } else {
+                
+                while (jumpHeight < 12) {
+                    moveDino(1, isDucking);  
+                    drawHurdle(missileX, missileY, missileActive, isDucking);
+                    jumpHeight++;
+                }
             }
             while (jumpHeight > 0) {
-                moveDino(2, isDucking);  
+                moveDino(2, isDucking); 
                 drawHurdle(missileX, missileY, missileActive, isDucking);
                 jumpHeight--;
             }
         } 
 
         
-        else if (ch == 'f' || ch == 'F') {  
-            if (!missileActive) {  
-                isVertical = false; 
-                missileY = 29; 
+        else if ((ch == 'f' || ch == 'F') && horizontalWeaponActive) {  
+            if (!missileActive && horizontalMissileCount > 0) {
+                isVertical = false;
+                missileY = 29;
                 fireProjectile(missileX, missileY, missileActive, isVertical);  
+                horizontalMissileCount--;  
+                if (horizontalMissileCount == 0) horizontalWeaponActive = false;  
             }
         }
 
         
-        else if (ch == 'v' || ch == 'V') {  
-            if (!missileActive) {  
-                isVertical = true; 
-                missileY = 21; 
+        else if ((ch == 'v' || ch == 'V') && verticalWeaponActive) {  
+            if (!missileActive && verticalMissileCount > 0) {
+                isVertical = true;
+                missileY = 21;
                 fireProjectile(missileX, missileY, missileActive, isVertical);  
+                verticalMissileCount--;  
+                if (verticalMissileCount == 0) verticalWeaponActive = false;  
             }
         }
 
-        
-        else if (ch == 'd' || ch == 'D') {  
-            isDucking = true;  
+        // Duck
+        else if (ch == 'd' || ch == 'D') {
+            isDucking = true;
         }
 
-        else if (ch == 'w' || ch == 'W') {  
-            isDucking = false;  
+        // Stand up
+        else if (ch == 'w' || ch == 'W') {
+            isDucking = false;
         }
 
-     
-        else if (ch == 'p' || ch == 'P') {  
-            getch();  
+        // Pause
+        else if (ch == 'p' || ch == 'P') {
+            getch();
         }
 
-       
-        else if (ch == 27) {  
+        // Open Shop
+        else if (ch == 'c' || ch == 'C') {
+            shopMenu();
+            clearScreen();
+            init();
+        }
+
+        // Exit
+        else if (ch == 27) {
             break;
         }
     }
