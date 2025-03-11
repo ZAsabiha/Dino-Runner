@@ -3,21 +3,17 @@
 
 #include <iostream>
 #include <windows.h>
-#include <conio.h>
+#include "Utility.h"
 
 class Dino {
+
+
 public:
-    Dino() : dinoY(0), speed(40) {}
-    void move(int jump = 0);
-    void gotoxy(int x, int y);
-    void setCursor(bool visible, DWORD size);
-
-private:
-    int dinoY;
-    int speed;
-    const int dinoPos = 2;
-
-    void drawDino(int jump);
+   
+    void moveDino(int jump = 0, bool ducking = false);
+    void selectDino();
 };
+
+#endif
 
 
