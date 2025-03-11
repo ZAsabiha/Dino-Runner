@@ -1,98 +1,134 @@
 #include "Dino.h"
+#include "Utility.h"
+#include <iostream>
+#include <windows.h>
+#include <conio.h>
+#include "global.h"
 
-void Dino::gotoxy(int x, int y) {
-    COORD coord;
-    coord.X = x;
-    coord.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
 
-void moveDino(int jump = 0, bool ducking = false) {
+
+
+void Dino::moveDino(int jump, bool ducking) {
     static int foot = 0;
+      
 
-    if (jump == 0)
-        dinoY = 0;
-    else if (jump == 2)
-        dinoY--;
-    else
-        dinoY++;
+    if (jump == 0) {
+        gameState.dinoY = 0;
+    } else if (jump == 2) {
+        gameState.dinoY--;  
+   
+    } else {
+        gameState.dinoY++;  
+     
+    }
 
 
-    gotoxy(dinoPos, 21 - dinoY); cout << "                      ";
+    
+    if (gameState.selectedDino == 1) {
   
-    if (selectedDino == 1) {
-
-    gotoxy(dinoPos, 22 - dinoY); cout << "             █████  ";
-    gotoxy(dinoPos, 23 - dinoY); cout << "            ███░░██";
-    gotoxy(dinoPos, 24 - dinoY); cout << "           ██████   ";
-    gotoxy(dinoPos, 25 - dinoY); cout << "  █          ███";
-    gotoxy(dinoPos, 26 - dinoY); cout << "  ██         ███ ";
-    gotoxy(dinoPos, 27 - dinoY); cout << "   ███     █████          ";
-    gotoxy(dinoPos, 28 - dinoY); cout << "     ██████████          ";
-    gotoxy(dinoPos, 29 - dinoY); cout << "    ██████████          ";
-    gotoxy(dinoPos, 30 - dinoY);
-    } else if (selectedDino == 2) {
-
-    gotoxy(dinoPos, 22 - dinoY); cout << "              ███  ";
-    gotoxy(dinoPos, 23 - dinoY); cout << "            ███░░██";
-    gotoxy(dinoPos, 24 - dinoY); cout << "             █████   ";
-    gotoxy(dinoPos, 25 - dinoY); cout << "  █           ██";
-    gotoxy(dinoPos, 26 - dinoY); cout << "  ██          ██ ";
-    gotoxy(dinoPos, 27 - dinoY); cout << "   ███        ██          ";
-    gotoxy(dinoPos, 28 - dinoY); cout << "      █████████          ";
-    gotoxy(dinoPos, 29 - dinoY); cout << "        ███████          ";
-    gotoxy(dinoPos, 30 - dinoY);
-    } else if (selectedDino == 3) {
+    Utility::gotoxy(dinoPos, 21 - gameState.dinoY); std::cout << "                      ";
+    Utility::gotoxy(dinoPos, 22 - gameState.dinoY); std::cout << "             █████  ";
+    Utility::gotoxy(dinoPos, 23 - gameState.dinoY); std::cout << "            ███░░██";
+    Utility::gotoxy(dinoPos, 24 - gameState.dinoY); std::cout << "           ██████   ";
+    Utility::gotoxy(dinoPos, 25 - gameState.dinoY); std::cout << "  █          ███";
+    Utility::gotoxy(dinoPos, 26 - gameState.dinoY); std::cout << "  ██         ███ ";
+    Utility::gotoxy(dinoPos, 27 - gameState.dinoY); std::cout << "   ███     █████          ";
+    Utility::gotoxy(dinoPos, 28 - gameState.dinoY); std::cout << "     ██████████          ";
+    Utility::gotoxy(dinoPos, 29 - gameState.dinoY); std::cout << "    ██████████          ";
+    Utility::gotoxy(dinoPos, 30 - gameState.dinoY);
+    } else if (gameState.selectedDino == 2) {
+    
+        Utility::gotoxy(dinoPos, 22 - gameState.dinoY); std::cout << "              ███  ";
+        Utility::gotoxy(dinoPos, 23 - gameState.dinoY); std::cout << "            ███░░██";
+        Utility::gotoxy(dinoPos, 24 - gameState.dinoY); std::cout << "             █████   ";
+        Utility::gotoxy(dinoPos, 25 - gameState.dinoY); std::cout << "  █           ██";
+        Utility::gotoxy(dinoPos, 26 - gameState.dinoY); std::cout << "  ██          ██ ";
+        Utility::gotoxy(dinoPos, 27 - gameState.dinoY); std::cout << "   ███        ██          ";
+        Utility::gotoxy(dinoPos, 28 - gameState.dinoY); std::cout << "      █████████          ";
+        Utility::gotoxy(dinoPos, 29 - gameState.dinoY); std::cout << "        ███████          ";
+        Utility::gotoxy(dinoPos, 30 - gameState.dinoY);
+    } else if (gameState.selectedDino == 3) {
         
-    gotoxy(dinoPos, 22 - dinoY); cout << "             █████  ";
-    gotoxy(dinoPos, 23 - dinoY); cout << "            ███░░██";
-    gotoxy(dinoPos, 24 - dinoY); cout << "           ██████   ";
-    gotoxy(dinoPos, 25 - dinoY); cout << "            ███";
-    gotoxy(dinoPos, 26 - dinoY); cout << "       ████████ ";
-    gotoxy(dinoPos, 27 - dinoY); cout << "       ████████          ";
-    gotoxy(dinoPos, 28 - dinoY); cout << "       ████████          ";
-    gotoxy(dinoPos, 29 - dinoY); cout << "       ████████          ";
-    gotoxy(dinoPos, 30 - dinoY);
+        Utility::gotoxy(dinoPos, 22 - gameState.dinoY); std::cout << "             █████  ";
+        Utility::gotoxy(dinoPos, 23 - gameState.dinoY); std::cout << "            ███░░██";
+        Utility::gotoxy(dinoPos, 24 - gameState.dinoY); std::cout << "           ██████   ";
+        Utility::gotoxy(dinoPos, 25 - gameState.dinoY); std::cout << "            ███";
+        Utility::gotoxy(dinoPos, 26 - gameState.dinoY); std::cout << "       ████████ ";
+        Utility::gotoxy(dinoPos, 27 - gameState.dinoY); std::cout << "       ████████          ";
+        Utility::gotoxy(dinoPos, 28 - gameState.dinoY); std::cout << "       ████████          ";
+        Utility::gotoxy(dinoPos, 29 - gameState.dinoY); std::cout << "       ████████          ";
+        Utility::gotoxy(dinoPos, 30 - gameState.dinoY);
     }
 
     if (ducking) {
-     
-        gotoxy(dinoPos, 21 - dinoY); cout << "                      ";  
-        gotoxy(dinoPos, 22 - dinoY); cout << "                      "; 
-        gotoxy(dinoPos, 23 - dinoY); cout << "                      "; 
-        gotoxy(dinoPos, 24 - dinoY); cout << "                      "; 
+       
+        Utility::gotoxy(dinoPos, 21 - gameState.dinoY); std::cout << "                      ";  
+        Utility::gotoxy(dinoPos, 22 - gameState.dinoY); std::cout << "                      ";  
+        Utility::gotoxy(dinoPos, 23 - gameState.dinoY); std::cout << "                      ";  
+        Utility::gotoxy(dinoPos, 24 - gameState.dinoY); std::cout << "                      ";  
 
-        // Draw the ducking position
-        gotoxy(dinoPos, 21 - dinoY); cout << "                  
-        gotoxy(dinoPos, 25 - dinoY); cout << "             ████  ";
-        gotoxy(dinoPos, 26 - dinoY); cout << "            ██░░██  ";
-        gotoxy(dinoPos, 27 - dinoY); cout << "     █      ████   ";
-        gotoxy(dinoPos, 28 - dinoY); cout << "      █   ██████   ";
-        gotoxy(dinoPos, 29 - dinoY); cout << "       ████████        ";
+        
+        Utility::gotoxy(dinoPos, 21 - gameState.dinoY); std::cout << "                      ";  
+        Utility::gotoxy(dinoPos, 25 - gameState.dinoY); std::cout << "             ████  ";
+        Utility::gotoxy(dinoPos, 26 - gameState.dinoY); std::cout << "            ██░░██  ";
+        Utility::gotoxy(dinoPos, 27 - gameState.dinoY); std::cout << "     █      ████   ";
+        Utility::gotoxy(dinoPos, 28 - gameState.dinoY); std::cout << "      █   ██████   ";
+        Utility::gotoxy(dinoPos, 29 - gameState.dinoY); std::cout << "       ████████        ";
       } else {
        if (jump == 1 || jump == 2) {
-        cout << "     █    █        ";
-        gotoxy(2, 31 - dinoY);
-        cout << "     █    █        ";
+        std::cout << "     █    █        ";
+        Utility::gotoxy(dinoPos, 31 - gameState.dinoY);
+        std::cout << "     █    █        ";
     } else if (foot == 0) {
       
-        gotoxy(2, 31 - dinoY);
-        cout << "       █   █      ";
+        Utility::gotoxy(dinoPos, 31 - gameState.dinoY);
+        std::cout << "       █   █      ";
         foot = !foot;
     } else if (foot == 1) {
-        cout << "      █    █     ";
-        gotoxy(2, 31 - dinoY);
-        cout << "    █       █  ";
+        std::cout << "      █    █     ";
+        Utility::gotoxy(dinoPos, 31 - gameState.dinoY);
+        std::cout << "    █       █  ";
         foot = !foot;
     }
     }
 
-    gotoxy(dinoPos, 32 - dinoY);
-    if (jump == 0) {
-       
-    } else {
-        cout << "                ";  
+    Utility::gotoxy(dinoPos, 32 - gameState.dinoY);
+    if (jump != 0) {
+      
+    
+        std::cout << "                ";  
     }
 
-    Sleep(speed);  
+    Sleep(gameState.speed);   
+}
+
+void Dino::selectDino() {
+    system("cls");
+
+    Utility::gotoxy(50, 6); 
+    std::cout << "Select your Dino: (\033[1;32m1\033[0m, \033[1;33m2\033[0m, or \033[1;34m3\033[0m)";
+
+    Utility::gotoxy(50, 7); 
+    std::cout << "\033[1;32m1.\033[0m Dino Type 1";
+
+    Utility::gotoxy(50, 8); 
+    std::cout << "\033[1;33m2.\033[0m Dino Type 2";
+
+    Utility::gotoxy(50, 9); 
+    std::cout << "\033[1;34m3.\033[0m Dino Type 3";
+
+    Utility::gotoxy(50, 11); 
+    std::cout << "Your selection: ";
+
+    char dinoChoice = getche();  
+
+    if (dinoChoice == '1') {
+        gameState.selectedDino = 1;  
+    } else if (dinoChoice == '2') {
+        gameState.selectedDino = 2;  
+    } else if (dinoChoice == '3') {
+        gameState.selectedDino = 3;  
+    } else {
+        gameState.selectedDino = 1;  
+    }
 }
