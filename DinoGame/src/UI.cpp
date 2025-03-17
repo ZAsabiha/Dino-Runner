@@ -9,7 +9,6 @@ UI::UI() {
 
 
 void UI::displayGameTitle() {
-    // Display the game title at specific coordinates with colored ASCII art
     Utility::gotoxy(55, 3);  std::cout << "\033[1;31m" << "  _____  _               _____             \n";
     Utility::gotoxy(55, 4);  std::cout << "\033[1;33m" << " |  __ \\(_)             |  __ \\            \n";
     Utility::gotoxy(55, 5);  std::cout << "\033[1;32m" << " | |  | |_ _ __   ___   | |__) |   _ _ __  \n";
@@ -20,7 +19,6 @@ void UI::displayGameTitle() {
 }
 
 void UI::instructions() {
-    // Clear the screen and display the instructions
     system("cls");
 
     // Display instructions with colored text
