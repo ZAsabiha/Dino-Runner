@@ -2,7 +2,6 @@
 #include "Utility.h"
 
 UI::UI() {
-    // Constructor
 }
 
 
