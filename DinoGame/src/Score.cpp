@@ -1,10 +1,9 @@
-// Score.cpp
 #include "Score.h"
-#include <fstream> // For file handling
+#include <fstream> 
 #include <iostream>
-#include <conio.h> // For gotoxy()
+#include <conio.h> 
 #include <windows.h>
-#include "Utility.h" // For gotoxy()
+#include "Utility.h"
 int gameover=0;
 Score::Score() : currentScore(0), highScore(0) {}
 
