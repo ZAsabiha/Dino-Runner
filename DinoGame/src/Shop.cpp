@@ -77,12 +77,12 @@ void Shop::shopMenu() {
                 }
                 break;
             case '5':
-                return; // Exit shop menu
+                return; 
             default:
                 Utility::gotoxy(55, 25);
                 std::cout << "\033[1;31mInvalid option! Please try again.\033[0m";
                 break;
         }
-        getch(); // Wait for user input before continuing
+        getch(); 
     }
 }
