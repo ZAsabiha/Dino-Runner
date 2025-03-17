@@ -23,4 +23,4 @@ private:
     void gotoxy(int x, int y);
 };
 
-#endif // SCORE_H
+#endif 
