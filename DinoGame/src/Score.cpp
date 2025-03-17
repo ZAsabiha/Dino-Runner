@@ -13,7 +13,7 @@ void Score::loadHighScore() {
         file >> highScore;
         file.close();
     } else {
-        highScore = 0; // Default if file doesn't exist
+        highScore = 0; 
     }
 }
 
@@ -34,7 +34,7 @@ void Score::displayScore(int currentScore) {
     Utility::gotoxy(3, 2);
     std::cout << "\033[1;32mSCORE: \033[0m" << currentScore;
     
-    // Display High Score
+    
     Utility::gotoxy(3, 4);
     std::cout << "\033[1;36mHIGH SCORE: \033[0m" << highScore;
 }
