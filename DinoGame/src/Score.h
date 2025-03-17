@@ -1,9 +1,8 @@
-// Score.h
 #ifndef SCORE_H
 #define SCORE_H
 
 #include <iostream>
-#include <fstream> // For file handling
+#include <fstream> 
 
 
 
