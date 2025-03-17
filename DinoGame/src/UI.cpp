@@ -21,7 +21,7 @@ void UI::displayGameTitle() {
 void UI::instructions() {
     system("cls");
 
-    // Display instructions with colored text
+
     Utility::gotoxy(50, 6);
     std::cout << "\033[36m ___           _                   _   _                 \033[0m";
     Utility::gotoxy(50, 7);
@@ -50,7 +50,7 @@ void UI::instructions() {
 }
 
 void UI::drawClouds() {
-    // Draw clouds at different positions
+   
     Utility::gotoxy(5, 5); std::cout << "\033[1;35m  _(  )_( )_  \033[0m"; 
     Utility::gotoxy(5, 6); std::cout << "\033[1;35m (_   _    _) \033[0m"; 
     Utility::gotoxy(5, 7); std::cout << "\033[1;35m   (_) (__)   \033[0m"; 
