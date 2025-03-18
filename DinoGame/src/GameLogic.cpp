@@ -23,7 +23,12 @@ void GameLogic::drawHurdle(int missileX, int missileY, bool &missileActive, bool
     int dinoHeight = isDucking ? 2 : 4;
     int dinoHitboxY = isDucking ? 29 : 22;
     int hurdleX = hurdlePos - plantX;
-
+    if (plantX > 0) {
+        for (int i = 20; i <= 31; i++) {
+            Utility::gotoxy(hurdlePos - plantX + 1, i);
+            std::cout << "       ";  // Ensure full erasure
+        }
+    }
  
     if(!isDucking){
     if ( plantX == 56 && gameState.dinoY < dinoHeight) {
@@ -153,52 +158,114 @@ void GameLogic::drawHurdle(int missileX, int missileY, bool &missileActive, bool
     }
 
    
-     if (gameState.powerUpX == -1 && rand() % 50 == 0) {
-        gameState.powerUpX = hurdlePos;
+    //  if (gameState.powerUpX == -1 && rand() % 50 == 0) {
+    //     gameState.powerUpX = hurdlePos;
         
         
-        int randomPowerUp = rand() % 3;
-        if (randomPowerUp == 0) gameState.currentPowerUp = "❤️"; 
-        else if (randomPowerUp == 1) gameState.currentPowerUp = "👌"; 
-        else gameState.currentPowerUp = "👍"; 
-    }
+    //     int randomPowerUp = rand() % 3;
+    //     if (randomPowerUp == 0) gameState.currentPowerUp = "❤️"; 
+    //     else if (randomPowerUp == 1) gameState.currentPowerUp = "🟢"; 
+    //     else gameState.currentPowerUp = "🔵"; 
+    // }
 
     
-    if (gameState.powerUpX != -1) {
-        Utility::gotoxy(gameState.powerUpX, 19); std::cout << " " << gameState.currentPowerUp << " ";
-        gameState.powerUpX--;
+    // if (gameState.powerUpX != -1) {
+    //     Utility::gotoxy(gameState.powerUpX, 19); std::cout << " " << gameState.currentPowerUp << " ";
+    //     gameState.powerUpX--;
 
         
+    //     if (gameState.powerUpX == dinoPos && gameState.dinoY < dinoHeight) {
+    //         if (gameState.currentPowerUp == "❤️" && gameState.lives < 3) {
+    //             gameState.lives++;
+    //             Utility::gotoxy(40, 2);
+    //             if(gameState.lives == 3) {
+    //         std::cout << "\033[1;31mLIVES: \033[1;32m" << gameState.lives << "\033[0m";
+    // } else if(gameState.lives == 2) {
+    //     std::cout << "\033[1;31mLIVES: \033[1;33m" << gameState.lives << "\033[0m";
+    // } else if(gameState.lives == 1) {
+    //     std::cout << "\033[1;31mLIVES: \033[1;31m" << gameState.lives << "\033[0m";
+    // }
+    //         } else if (gameState.currentPowerUp == "🟢") {
+    //             gameState.currentScore += 10; 
+    //             Utility::gotoxy(11, 2); std::cout << gameState.currentScore;
+    //         } else if (gameState.currentPowerUp == "🔵") {
+    //             gameState.currentScore += 5; 
+    //             Utility::gotoxy(11, 2); std::cout << gameState.currentScore;
+    //         }
+    //         gameState.powerUpX = -1; 
+    //     }
+
+    //     if (gameState.powerUpX < 0) gameState.powerUpX = -1;
+    // }
+    if (gameState.powerUpX == -1 && rand() % 50 == 0) {
+        gameState.powerUpX = hurdlePos;
+    
+        int randomPowerUp = rand() % 3;
+        if (randomPowerUp == 0) gameState.currentPowerUp = "❤️"; 
+        else if (randomPowerUp == 1) gameState.currentPowerUp = "🟢"; 
+        else gameState.currentPowerUp = "🔵"; 
+    }
+    
+    if (gameState.powerUpX != -1) {
+        int powerUpY = isDucking ? 27 : 24; // Correct Y-axis alignment
+        Utility::gotoxy(gameState.powerUpX, powerUpY); 
+        std::cout << " " << gameState.currentPowerUp << " ";
+    
+        Utility::gotoxy(gameState.powerUpX + 2, powerUpY); 
+        std::cout << "   ";  
+    
+        gameState.powerUpX--;
+    
         if (gameState.powerUpX == dinoPos && gameState.dinoY < dinoHeight) {
             if (gameState.currentPowerUp == "❤️" && gameState.lives < 3) {
                 gameState.lives++;
                 Utility::gotoxy(40, 2);
+                std::cout << "\033[1;31mLIVES: ";
                 if(gameState.lives == 3) {
-            std::cout << "\033[1;31mLIVES: \033[1;32m" << gameState.lives << "\033[0m";
-    } else if(gameState.lives == 2) {
-        std::cout << "\033[1;31mLIVES: \033[1;33m" << gameState.lives << "\033[0m";
-    } else if(gameState.lives == 1) {
-        std::cout << "\033[1;31mLIVES: \033[1;31m" << gameState.lives << "\033[0m";
-    }
-            } else if (gameState.currentPowerUp == "👌") {
+                    std::cout << "\033[1;32m" << gameState.lives << "\033[0m";
+                } else if(gameState.lives == 2) {
+                    std::cout << "\033[1;33m" << gameState.lives << "\033[0m";
+                } else if(gameState.lives == 1) {
+                    std::cout << "\033[1;31m" << gameState.lives << "\033[0m";
+                }
+            } else if (gameState.currentPowerUp == "🟢") {
                 gameState.currentScore += 10; 
-                Utility::gotoxy(11, 2); std::cout << gameState.currentScore;
-            } else if (gameState.currentPowerUp == "👍") {
-                gameState.speed += 5; 
-                if (gameState.speed < 20) gameState.speed = 20;
+                Utility::gotoxy(11, 2); 
+                std::cout << gameState.currentScore;
+            } else if (gameState.currentPowerUp == "🔵") {
+                gameState.currentScore += 5; 
+                Utility::gotoxy(11, 2); 
+                std::cout << gameState.currentScore;
             }
-            gameState.powerUpX = -1; 
+    
+            Utility::gotoxy(gameState.powerUpX, powerUpY);
+            std::cout << "   ";
+            gameState.powerUpX = -1;
+    
+            return;  // Important: Stop further execution immediately after collection
         }
-
-        if (gameState.powerUpX < 0) gameState.powerUpX = -1;
+    
+        if (gameState.powerUpX < 0) {
+            Utility::gotoxy(0, powerUpY);
+            std::cout << "   ";  
+            gameState.powerUpX = -1;
+        }
+    
     }
-
-
    
     plantX++;
-    if (plantX == 73) {
+    if (plantX >= hurdlePos - 6) {
+        for (int x = 0; x < 6; x++) {
+            for (int i = 20; i <= 31; i++) {
+                if (obstacleType == 2 && (i < 21 || i > 23)) continue;
+                Utility::gotoxy(hurdlePos - plantX + x, i);
+                std::cout << "       ";
+            }
+            Sleep(5);
+        }
+    
         plantX = 0;
-       score++;
+        score++;
         gameState.currentScore = score;
 
         Utility::gotoxy(11, 2);
