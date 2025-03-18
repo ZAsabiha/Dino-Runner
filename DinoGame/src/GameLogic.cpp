@@ -265,6 +265,7 @@ void GameLogic::drawHurdle(int missileX, int missileY, bool &missileActive, bool
         }
     
         plantX = 0;
+        score = gameState.currentScore;
         score++;
         gameState.currentScore = score;
 
