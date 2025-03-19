@@ -14,7 +14,6 @@ GameOver go;
 
 
 
-
 void GameLogic::drawHurdle(int missileX, int missileY, bool &missileActive, bool isDucking) {
     static int plantX = 0;
     static int obstacleType = rand() % 3;
@@ -157,7 +156,46 @@ void GameLogic::drawHurdle(int missileX, int missileY, bool &missileActive, bool
             break;
     }
 
+   
+    //  if (gameState.powerUpX == -1 && rand() % 50 == 0) {
+    //     gameState.powerUpX = hurdlePos;
+        
+        
+    //     int randomPowerUp = rand() % 3;
+    //     if (randomPowerUp == 0) gameState.currentPowerUp = "❤️"; 
+    //     else if (randomPowerUp == 1) gameState.currentPowerUp = "🟢"; 
+    //     else gameState.currentPowerUp = "🔵"; 
+    // }
 
+    
+    // if (gameState.powerUpX != -1) {
+    //     Utility::gotoxy(gameState.powerUpX, 19); std::cout << " " << gameState.currentPowerUp << " ";
+    //     gameState.powerUpX--;
+
+        
+    //     if (gameState.powerUpX == dinoPos && gameState.dinoY < dinoHeight) {
+    //         if (gameState.currentPowerUp == "❤️" && gameState.lives < 3) {
+    //             gameState.lives++;
+    //             Utility::gotoxy(40, 2);
+    //             if(gameState.lives == 3) {
+    //         std::cout << "\033[1;31mLIVES: \033[1;32m" << gameState.lives << "\033[0m";
+    // } else if(gameState.lives == 2) {
+    //     std::cout << "\033[1;31mLIVES: \033[1;33m" << gameState.lives << "\033[0m";
+    // } else if(gameState.lives == 1) {
+    //     std::cout << "\033[1;31mLIVES: \033[1;31m" << gameState.lives << "\033[0m";
+    // }
+    //         } else if (gameState.currentPowerUp == "🟢") {
+    //             gameState.currentScore += 10; 
+    //             Utility::gotoxy(11, 2); std::cout << gameState.currentScore;
+    //         } else if (gameState.currentPowerUp == "🔵") {
+    //             gameState.currentScore += 5; 
+    //             Utility::gotoxy(11, 2); std::cout << gameState.currentScore;
+    //         }
+    //         gameState.powerUpX = -1; 
+    //     }
+
+    //     if (gameState.powerUpX < 0) gameState.powerUpX = -1;
+    // }
     if (gameState.powerUpX == -1 && rand() % 50 == 0) {
         gameState.powerUpX = hurdlePos;
     
@@ -168,7 +206,7 @@ void GameLogic::drawHurdle(int missileX, int missileY, bool &missileActive, bool
     }
     
     if (gameState.powerUpX != -1) {
-        int powerUpY = 24; 
+        int powerUpY = 24; // Correct Y-axis alignment
         Utility::gotoxy(gameState.powerUpX, powerUpY); 
         std::cout << " " << gameState.currentPowerUp << " ";
     
@@ -230,6 +268,7 @@ void GameLogic::drawHurdle(int missileX, int missileY, bool &missileActive, bool
         score++;
         gameState.currentScore = score;
 
+
         Utility::gotoxy(11, 2);
         std::cout << "     ";
         Utility::gotoxy(11, 2);
@@ -276,6 +315,7 @@ void GameLogic::drawProjectile(int missileX, int missileY, bool missileActive, b
     }
 
 }
+
 
 
 
