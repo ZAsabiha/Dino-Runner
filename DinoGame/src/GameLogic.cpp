@@ -168,7 +168,7 @@ void GameLogic::drawHurdle(int missileX, int missileY, bool &missileActive, bool
     }
     
     if (gameState.powerUpX != -1) {
-        int powerUpY = isDucking ? 27 : 24; // Correct Y-axis alignment
+        int powerUpY = 24; 
         Utility::gotoxy(gameState.powerUpX, powerUpY); 
         std::cout << " " << gameState.currentPowerUp << " ";
     
