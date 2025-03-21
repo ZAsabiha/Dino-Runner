@@ -1,0 +1,2 @@
+//g++ Main.cpp Global.cpp UI.cpp GameControl.cpp Score.cpp GameLogic.cpp GameOver.cpp MainMenu.cpp Utility.cpp Dino.cpp Shop.cpp -o trex.exe
+//trex.exe
