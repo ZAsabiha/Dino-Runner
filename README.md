@@ -7,7 +7,7 @@ This project was built in C++ as a basic but exciting game development exercise.
 
 ## 🎮 Overview
 
-In this version of Dino Runner, the dino isn’t just running — it can **jump, duck, fire missiles**, and **buy power-ups** using the score it earns. The game also **tracks the previous high score**, making each run more competitive.
+In this version of Dino Runner, the dino isn’t just running — it can **jump, duck, fire missiles,collect powerupps,shop**, and  using the score it earns. The game also **tracks the previous high score**, making each run more competitive.
 
 ---
 
