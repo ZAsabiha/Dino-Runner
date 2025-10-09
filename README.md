@@ -62,9 +62,13 @@ It was a great project to explore **C++ game loops, input handling, and state ma
 //trex.exe
 
 ## some screenshots
+
 1.Main menu of the game
+
 ![WhatsApp Image 2025-05-08 at 12 02 46 PM](https://github.com/user-attachments/assets/74faf9a3-7546-404d-8f0d-1298e298127b)
+
 2.Instructions of the game
+
 ![WhatsApp Image 2025-05-08 at 12 24 59 PM](https://github.com/user-attachments/assets/32c889ea-319c-4e76-860d-d08f2fb8decb)
 
 3.Dino game ducking
