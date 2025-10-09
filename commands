@@ -1,2 +1,6 @@
+1. Clone the repository:
+///https://github.com/ZAsabiha/Dino-Runner.git
+2.run the files
 //g++ Main.cpp Global.cpp UI.cpp GameControl.cpp Score.cpp GameLogic.cpp GameOver.cpp MainMenu.cpp Utility.cpp Dino.cpp Shop.cpp -o trex.exe
 //trex.exe
+
