@@ -57,4 +57,5 @@ It was a great project to explore **C++ game loops, input handling, and state ma
 ///https://github.com/ZAsabiha/Dino-Runner.git
 2.run the files
 //g++ Main.cpp Global.cpp UI.cpp GameControl.cpp Score.cpp GameLogic.cpp GameOver.cpp MainMenu.cpp Utility.cpp Dino.cpp Shop.cpp -o trex.exe
+
 //trex.exe
